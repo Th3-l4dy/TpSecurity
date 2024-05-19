@@ -1,0 +1,70 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher Encryption/Decryption</title>
+</head>
+<body>
+    <h1>Hill Cipher Encryption/Decryption</h1>
+    <form action="/process" method="post" enctype="multipart/form-data">
+        <label for="file">Choose text file:</label>
+        <input type="file" id="file" name="file" required><br><br>
+        
+        <label for="key">Enter key:</label>
+        <input type="text" id="key" name="key" required><br><br>
+
+        <label for="mode">Choose mode:</label>
+        <select id="mode" name="mode" required>
+            <option value="encrypt">Encrypt</option>
+            <option value="decrypt">Decrypt</option>
+        </select><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Hill Cipher Encryption/Decryption</h1>
+        <form action="/process" method="post" enctype="multipart/form-data">
+            <div class="input-group">
+                <label for="file">Upload File:</label>
+                <input type="file" name="file" id="file" required>
+            </div>
+            <div class="input-group">
+                <label for="key">Enter Key:</label>
+                <input type="text" name="key" id="key" required>
+            </div>
+            <div class="input-group">
+                <label for="mode">Mode:</label>
+                <select name="mode" id="mode">
+                    <option value="encrypt">Encrypt</option>
+                    <option value="decrypt">Decrypt</option>
+                </select>
+            </div>
+            <button type="submit">Process</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Result</h2>
+            <p><strong>Original Message:</strong></p>
+            <pre>{{ original_message }}</pre>
+            <p><strong>Processed Message:</strong></p>
+            <pre>{{ result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
