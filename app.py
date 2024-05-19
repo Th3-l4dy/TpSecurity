@@ -7,17 +7,34 @@ from hill_cipher import hill_encrypt, hill_decrypt, is_invertible
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 
+# def key_to_matrix(key):
+#     key_length = len(key)
+#     n = int(key_length ** 0.5)
+#     if n * n != key_length:
+#         raise ValueError("Key length must be a perfect square")
+
+#     key_matrix = [[0] * n for _ in range(n)]
+#     for i in range(n):
+#         for j in range(n):
+#             key_matrix[i][j] = ord(key[i * n + j]) % 256  # Convert character to ASCII value and modulo 256
+#     return np.array(key_matrix)  # Ensure it returns a numpy array
+
+
 def key_to_matrix(key):
     key_length = len(key)
     n = int(key_length ** 0.5)
-    if n * n != key_length:
-        raise ValueError("Key length must be a perfect square")
-
+    if n * n < key_length:
+        n += 1
+    
+    key = key.ljust(n * n, 'X')  # Pad the key with 'X' until its length is a perfect square
     key_matrix = [[0] * n for _ in range(n)]
+
     for i in range(n):
         for j in range(n):
-            key_matrix[i][j] = ord(key[i * n + j]) % 256  # Convert character to ASCII value and modulo 256
-    return np.array(key_matrix)  # Ensure it returns a numpy array
+            key_matrix[i][j] = ord(key[i * n + j]) % 256
+
+    return np.array(key_matrix)
+
 
 @app.route('/')
 def index():
