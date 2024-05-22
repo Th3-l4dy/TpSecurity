@@ -17,10 +17,11 @@ def hill_encrypt(message, key_matrix):
 def hill_decrypt(ciphertext, key_matrix):
     n = key_matrix.shape[0]
     ciphertext = [ord(char) % 256 for char in ciphertext]
-    # Calculate inverse of the key matrix
+ 
     try:
         key_matrix_inv = np.linalg.inv(key_matrix)
-        key_matrix_inv = key_matrix_inv.astype(int) % 256  # ensure integer values in the range [0, 255]
+        key_matrix_inv = key_matrix_inv.astype(int) % 256 
+        print("the inv of  key matrix is  ",key_matrix_inv) # ensure integer values in the range [0, 255]
     except np.linalg.LinAlgError:
         raise ValueError("Key matrix is not invertible")
 
